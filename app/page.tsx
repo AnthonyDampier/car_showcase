@@ -7,9 +7,9 @@ import { fetchCars } from "@/utils";
 
 
 export default async function Home() {
-  // const allCars = await fetchCars();
+  let allCars = await fetchCars();
   // console.log(allCars)
-  const allCars =   [{
+  allCars =  allCars.length === 0 ? [{
     city_mpg: 23,
     class: 'compact car',
     combination_mpg: 25,
@@ -50,7 +50,7 @@ export default async function Home() {
     model: 'corolla wagon',
     transmission: 'a',
     year: 1993
-  }]
+  }] : allCars;
   // console.log(allCars)
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -85,11 +85,6 @@ export default async function Home() {
                 <CarCard car={car} />
               ))}
             </div>
-
-            {/* <ShowMore
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
-            /> */}
           </section>
         ) : (
           <div className='home__error-container'>
